@@ -53,20 +53,16 @@
       </properties>
     </column>
     <column>
-      <name>STATE_ID</name>
+      <name>STATE_CODE</name>
       <dataTypeUsage>
         <attributeValues>
           <entry>
-            <key>precision</key>
-            <value class="java.lang.String">6</value>
-          </entry>
-          <entry>
-            <key>scale</key>
-            <value class="java.lang.Integer">0</value>
+            <key>size</key>
+            <value class="java.lang.Integer">3</value>
           </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
+          <typeName>VARCHAR2</typeName>
         </dataTypeID>
       </dataTypeUsage>
       <notNull>false</notNull>
@@ -191,104 +187,6 @@
     </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>HOURS_CHK</name>
-      <checkCondition>HOURS_SPENT &lt; HOURS_PREDICTED</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>PERCENT_DONE_CHK</name>
-      <checkCondition>PERCENT_DONE &lt;= 100 AND PERCENT_DONE &gt;= 0</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASK_PROJ_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PROJECT_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>PROJ_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>PROJECTS</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASK_SIP_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>STATE_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PROJECT_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>SIP_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>STATES_IN_PROJECTS</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASK_STATE_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>STATE_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>STATE_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>STATES</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
     <constraint class="oracle.javatools.db.PKConstraint">
       <name>TASK_PK</name>
       <columnIDs>
@@ -325,6 +223,104 @@
         <type>INDEX</type>
       </indexID>
     </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>TASK_PROJ_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>PROJECT_ID</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>PROJ_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>PROJECTS</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>TASK_SIP_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>STATE_CODE</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>PROJECT_ID</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>SIP_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>STATES_IN_PROJECTS</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>TASK_STATE_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>STATE_CODE</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>STATE_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>STATES</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>HOURS_CHK</name>
+      <checkCondition>HOURS_SPENT &lt; HOURS_PREDICTED</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>PERCENT_DONE_CHK</name>
+      <checkCondition>PERCENT_DONE &lt;= 100 AND PERCENT_DONE &gt;= 0</checkCondition>
+      <enabled>true</enabled>
+    </constraint>
   </constraints>
   <indexes>
     <index>
@@ -349,7 +345,7 @@
       <name>IDX_TASK_SIP_FK</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>STATE_ID</expressionSource>
+          <expressionSource>STATE_CODE</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
         <columnExpression>

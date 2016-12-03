@@ -3,30 +3,23 @@
   <name>STATES</name>
   <columns>
     <column>
-      <name>STATE_ID</name>
+      <name>STATE_CODE</name>
       <dataTypeUsage>
         <attributeValues>
           <entry>
-            <key>precision</key>
-            <value class="java.lang.String">6</value>
-          </entry>
-          <entry>
-            <key>scale</key>
-            <value class="java.lang.Integer">0</value>
+            <key>size</key>
+            <value class="java.lang.Long">3</value>
           </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
+          <typeName>VARCHAR2</typeName>
         </dataTypeID>
       </dataTypeUsage>
-      <identityProperties>
-        <generated>ALWAYS</generated>
-      </identityProperties>
       <notNull>true</notNull>
       <properties>
         <entry>
           <key>Comment</key>
-          <value class="java.lang.String">Id of the state</value>
+          <value class="java.lang.String">Code of the state</value>
         </entry>
       </properties>
     </column>
@@ -57,7 +50,7 @@
       <name>STATE_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
-          <name>STATE_ID</name>
+          <name>STATE_CODE</name>
           <parent class="oracle.javatools.db.NameBasedID">
             <name>STATES</name>
             <schemaName>SCHEMA1</schemaName>
@@ -69,7 +62,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>IDX_STATE_PK</name>
+        <name>STATE_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>STATES</name>
           <schemaName>SCHEMA1</schemaName>
@@ -82,10 +75,10 @@
   </constraints>
   <indexes>
     <index>
-      <name>IDX_STATE_PK</name>
+      <name>STATE_PK</name>
       <columnExpressions>
         <columnExpression>
-          <expressionSource>STATE_ID</expressionSource>
+          <expressionSource>STATE_CODE</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>

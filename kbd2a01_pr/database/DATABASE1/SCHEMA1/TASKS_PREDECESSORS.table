@@ -75,10 +75,51 @@
     </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>TASK_DIFFERENT_CHK</name>
-      <checkCondition>PREV_TASK_NO != TASK_NO</checkCondition>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>TP_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>PROJECT_ID</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS_PREDECESSORS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>TASK_NO</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS_PREDECESSORS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>PREV_TASK_NO</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS_PREDECESSORS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
       <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>IDX_TP_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>TASKS_PREDECESSORS</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
     </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
       <name>TP_PREV_TASK_FK</name>
@@ -141,6 +182,7 @@
         </columnID>
       </columnIDs>
       <enabled>true</enabled>
+      <onDeleteAction>CASCADE</onDeleteAction>
       <referenceID class="oracle.javatools.db.NameBasedID">
         <name>TASK_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
@@ -152,51 +194,10 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>TP_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PROJECT_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_PREDECESSORS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>TASK_NO</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_PREDECESSORS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PREV_TASK_NO</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_PREDECESSORS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>TASK_DIFFERENT_CHK</name>
+      <checkCondition>PREV_TASK_NO != TASK_NO</checkCondition>
       <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>IDX_TP_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>TASKS_PREDECESSORS</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
     </constraint>
   </constraints>
   <indexes>
