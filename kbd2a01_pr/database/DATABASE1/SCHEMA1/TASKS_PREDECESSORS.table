@@ -1,6 +1,6 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <table xmlns="http://xmlns.oracle.com/jdeveloper/1211/offlinedb">
-  <name>TASKS_TRANSITIONS</name>
+  <name>TASKS_PREDECESSORS</name>
   <columns>
     <column>
       <name>PROJECT_ID</name>
@@ -20,6 +20,31 @@
         <entry>
           <key>Comment</key>
           <value class="java.lang.String">Id of the project to which this rule applies.</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>TASK_NO</name>
+      <dataTypeUsage>
+        <attributeValues>
+          <entry>
+            <key>precision</key>
+            <value class="java.lang.String">6</value>
+          </entry>
+          <entry>
+            <key>scale</key>
+            <value class="java.lang.Integer">0</value>
+          </entry>
+        </attributeValues>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>NUMBER</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Id of the associated next task&apos;s number.</value>
         </entry>
       </properties>
     </column>
@@ -48,78 +73,12 @@
         </entry>
       </properties>
     </column>
-    <column>
-      <name>NEXT_TASK_NO</name>
-      <dataTypeUsage>
-        <attributeValues>
-          <entry>
-            <key>precision</key>
-            <value class="java.lang.String">6</value>
-          </entry>
-          <entry>
-            <key>scale</key>
-            <value class="java.lang.Integer">0</value>
-          </entry>
-        </attributeValues>
-        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
-          <typeName>NUMBER</typeName>
-        </dataTypeID>
-      </dataTypeUsage>
-      <notNull>true</notNull>
-      <properties>
-        <entry>
-          <key>Comment</key>
-          <value class="java.lang.String">Id of the associated next task&apos;s number.</value>
-        </entry>
-      </properties>
-    </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>TT_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PROJECT_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_TRANSITIONS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PREV_TASK_NO</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_TRANSITIONS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>NEXT_TASK_NO</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_TRANSITIONS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
+    <constraint class="oracle.javatools.db.CheckConstraint">
+      <name>TASK_DIFFERENT_CHK</name>
+      <checkCondition>PREV_TASK_NO != TASK_NO</checkCondition>
       <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>TT_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>TASKS_TRANSITIONS</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
     </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
       <name>TT_NEXT_TASK_FK</name>
@@ -127,7 +86,7 @@
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>PROJECT_ID</name>
           <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_TRANSITIONS</name>
+            <name>TASKS_PREDECESSORS</name>
             <schemaName>SCHEMA1</schemaName>
             <type>TABLE</type>
           </parent>
@@ -135,9 +94,9 @@
           <type>COLUMN</type>
         </columnID>
         <columnID class="oracle.javatools.db.NameBasedID">
-          <name>NEXT_TASK_NO</name>
+          <name>TASK_NO</name>
           <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_TRANSITIONS</name>
+            <name>TASKS_PREDECESSORS</name>
             <schemaName>SCHEMA1</schemaName>
             <type>TABLE</type>
           </parent>
@@ -163,7 +122,7 @@
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>PROJECT_ID</name>
           <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_TRANSITIONS</name>
+            <name>TASKS_PREDECESSORS</name>
             <schemaName>SCHEMA1</schemaName>
             <type>TABLE</type>
           </parent>
@@ -173,7 +132,7 @@
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>PREV_TASK_NO</name>
           <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS_TRANSITIONS</name>
+            <name>TASKS_PREDECESSORS</name>
             <schemaName>SCHEMA1</schemaName>
             <type>TABLE</type>
           </parent>
@@ -193,10 +152,51 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>TASK_DIFFERENT_CHK</name>
-      <checkCondition>PREV_TASK_NO &lt;&gt; NEXT_TASK_NO</checkCondition>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>TT_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>PROJECT_ID</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS_PREDECESSORS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>PREV_TASK_NO</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS_PREDECESSORS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>TASK_NO</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS_PREDECESSORS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
       <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>TT_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>TASKS_PREDECESSORS</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
     </constraint>
   </constraints>
   <indexes>
@@ -207,7 +207,7 @@
           <expressionSource>PROJECT_ID</expressionSource>
         </columnExpression>
         <columnExpression>
-          <expressionSource>NEXT_TASK_NO</expressionSource>
+          <expressionSource>TASK_NO</expressionSource>
         </columnExpression>
       </columnExpressions>
       <indexType>NORMAL</indexType>
@@ -228,7 +228,7 @@
           <orderType>ASC</orderType>
         </columnExpression>
         <columnExpression>
-          <expressionSource>NEXT_TASK_NO</expressionSource>
+          <expressionSource>TASK_NO</expressionSource>
           <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>
