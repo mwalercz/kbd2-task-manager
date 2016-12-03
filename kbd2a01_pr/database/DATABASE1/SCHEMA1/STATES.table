@@ -62,7 +62,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>STATE_PK</name>
+        <name>IDX_STATE_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>STATES</name>
           <schemaName>SCHEMA1</schemaName>
@@ -75,7 +75,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>STATE_PK</name>
+      <name>IDX_STATE_PK</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>STATE_CODE</expressionSource>

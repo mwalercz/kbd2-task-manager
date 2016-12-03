@@ -69,7 +69,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>PROJECTS_PK_I</name>
+        <name>IDX_PROJ_PK_I</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>PROJECTS</name>
           <schemaName>SCHEMA1</schemaName>
@@ -82,7 +82,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>PROJECTS_PK_I</name>
+      <name>IDX_PROJ_PK_I</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>PROJECT_ID</expressionSource>

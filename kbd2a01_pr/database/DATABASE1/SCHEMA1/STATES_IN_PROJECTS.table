@@ -50,42 +50,6 @@
     </column>
   </columns>
   <constraints>
-    <constraint class="oracle.javatools.db.PKConstraint">
-      <name>SIP_PK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>STATE_CODE</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>STATES_IN_PROJECTS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PROJECT_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>STATES_IN_PROJECTS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <indexID class="oracle.javatools.db.NameBasedID">
-        <name>SIP_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>STATES_IN_PROJECTS</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>INDEX</type>
-      </indexID>
-    </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
       <name>SIP_PROJ_FK</name>
       <columnIDs>
@@ -138,24 +102,46 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
+    <constraint class="oracle.javatools.db.PKConstraint">
+      <name>SIP_PK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>STATE_CODE</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>STATES_IN_PROJECTS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>PROJECT_ID</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>STATES_IN_PROJECTS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <indexID class="oracle.javatools.db.NameBasedID">
+        <name>IDX_SIP_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>STATES_IN_PROJECTS</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>INDEX</type>
+      </indexID>
+    </constraint>
   </constraints>
   <indexes>
     <index>
-      <name>IDX_SIP_STATE_FK</name>
-      <columnExpressions>
-        <columnExpression>
-          <expressionSource>STATE_CODE</expressionSource>
-          <orderType>ASC</orderType>
-        </columnExpression>
-      </columnExpressions>
-      <indexType>NORMAL</indexType>
-      <schema>
-        <name>SCHEMA1</name>
-      </schema>
-      <systemGenerated>false</systemGenerated>
-    </index>
-    <index>
-      <name>SIP_PK</name>
+      <name>IDX_SIP_PK</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>STATE_CODE</expressionSource>
@@ -167,6 +153,20 @@
         </columnExpression>
       </columnExpressions>
       <indexType>UNIQUE</indexType>
+      <schema>
+        <name>SCHEMA1</name>
+      </schema>
+      <systemGenerated>false</systemGenerated>
+    </index>
+    <index>
+      <name>IDX_SIP_STATE_FK</name>
+      <columnExpressions>
+        <columnExpression>
+          <expressionSource>STATE_CODE</expressionSource>
+          <orderType>ASC</orderType>
+        </columnExpression>
+      </columnExpressions>
+      <indexType>NORMAL</indexType>
       <schema>
         <name>SCHEMA1</name>
       </schema>
