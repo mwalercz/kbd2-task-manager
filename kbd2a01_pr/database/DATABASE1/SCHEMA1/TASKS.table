@@ -202,7 +202,7 @@
       <enabled>true</enabled>
     </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASKS_PROJECTS_FK</name>
+      <name>TASK_PROJ_FK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>PROJECT_ID</name>
@@ -217,7 +217,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>PROJECTS_PK</name>
+        <name>PROJ_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>PROJECTS</name>
           <schemaName>SCHEMA1</schemaName>
@@ -228,33 +228,7 @@
       </referenceID>
     </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASKS_STATES_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>STATE_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>STATES_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>STATES</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASKS_STATES_IN_PROJECTS_FK</name>
+      <name>TASK_SIP_FK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>STATE_ID</name>
@@ -279,7 +253,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>STATES_IN_PROJECTS_PK</name>
+        <name>SIP_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>STATES_IN_PROJECTS</name>
           <schemaName>SCHEMA1</schemaName>
@@ -289,8 +263,34 @@
         <type>CONSTRAINT</type>
       </referenceID>
     </constraint>
+    <constraint class="oracle.javatools.db.FKConstraint">
+      <name>TASK_STATE_FK</name>
+      <columnIDs>
+        <columnID class="oracle.javatools.db.NameBasedID">
+          <name>STATE_ID</name>
+          <parent class="oracle.javatools.db.NameBasedID">
+            <name>TASKS</name>
+            <schemaName>SCHEMA1</schemaName>
+            <type>TABLE</type>
+          </parent>
+          <schemaName>SCHEMA1</schemaName>
+          <type>COLUMN</type>
+        </columnID>
+      </columnIDs>
+      <enabled>true</enabled>
+      <referenceID class="oracle.javatools.db.NameBasedID">
+        <name>STATE_PK</name>
+        <parent class="oracle.javatools.db.NameBasedID">
+          <name>STATES</name>
+          <schemaName>SCHEMA1</schemaName>
+          <type>TABLE</type>
+        </parent>
+        <schemaName>SCHEMA1</schemaName>
+        <type>CONSTRAINT</type>
+      </referenceID>
+    </constraint>
     <constraint class="oracle.javatools.db.PKConstraint">
-      <name>TASKS_PK</name>
+      <name>TASK_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>PROJECT_ID</name>
@@ -315,7 +315,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>TASKS_PK</name>
+        <name>IDX_TASK_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>TASKS</name>
           <schemaName>SCHEMA1</schemaName>
@@ -328,7 +328,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>TASKS_PK</name>
+      <name>IDX_TASK_PK</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>PROJECT_ID</expressionSource>
@@ -346,13 +346,15 @@
       <systemGenerated>true</systemGenerated>
     </index>
     <index>
-      <name>TASKS_STATES_IN_PROJECTS_FK_I</name>
+      <name>IDX_TASK_SIP_FK</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>STATE_ID</expressionSource>
+          <orderType>ASC</orderType>
         </columnExpression>
         <columnExpression>
           <expressionSource>PROJECT_ID</expressionSource>
+          <orderType>ASC</orderType>
         </columnExpression>
       </columnExpressions>
       <indexType>NORMAL</indexType>

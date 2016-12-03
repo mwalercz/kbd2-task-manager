@@ -54,7 +54,7 @@
   </columns>
   <constraints>
     <constraint class="oracle.javatools.db.PKConstraint">
-      <name>PROJECTS_PK</name>
+      <name>PROJ_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>PROJECT_ID</name>

@@ -54,7 +54,7 @@
   </columns>
   <constraints>
     <constraint class="oracle.javatools.db.PKConstraint">
-      <name>STATES_PK</name>
+      <name>STATE_PK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
           <name>STATE_ID</name>
@@ -69,7 +69,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>STATES_PK_I</name>
+        <name>IDX_STATE_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>STATES</name>
           <schemaName>SCHEMA1</schemaName>
@@ -82,7 +82,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>STATES_PK_I</name>
+      <name>IDX_STATE_PK</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>STATE_ID</expressionSource>
