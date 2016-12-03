@@ -312,11 +312,6 @@
       </referenceID>
     </constraint>
     <constraint class="oracle.javatools.db.CheckConstraint">
-      <name>HOURS_CHK</name>
-      <checkCondition>HOURS_SPENT &lt; HOURS_PREDICTED</checkCondition>
-      <enabled>true</enabled>
-    </constraint>
-    <constraint class="oracle.javatools.db.CheckConstraint">
       <name>PERCENT_DONE_CHK</name>
       <checkCondition>PERCENT_DONE &lt;= 100 AND PERCENT_DONE &gt;= 0</checkCondition>
       <enabled>true</enabled>
