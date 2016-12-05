@@ -21,6 +21,9 @@
       </dataTypeUsage>
       <identityProperties>
         <generated>ALWAYS</generated>
+        <incrementBy>1</incrementBy>
+        <minValue>1</minValue>
+        <startWith>1</startWith>
       </identityProperties>
       <notNull>true</notNull>
       <properties>
@@ -69,7 +72,7 @@
       </columnIDs>
       <enabled>true</enabled>
       <indexID class="oracle.javatools.db.NameBasedID">
-        <name>IDX_PROJ_PK_I</name>
+        <name>IDX_PROJ_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>PROJECTS</name>
           <schemaName>SCHEMA1</schemaName>
@@ -82,7 +85,7 @@
   </constraints>
   <indexes>
     <index>
-      <name>IDX_PROJ_PK_I</name>
+      <name>IDX_PROJ_PK</name>
       <columnExpressions>
         <columnExpression>
           <expressionSource>PROJECT_ID</expressionSource>
