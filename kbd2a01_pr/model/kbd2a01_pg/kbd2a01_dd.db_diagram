@@ -1037,7 +1037,7 @@
         <semanticModel xmi:type='DI:SimpleSemanticModelBridge' typeInfo='sourcemultiplicity'/>
       </contained>
       <contained xmi:type='DI:GraphNode' xmi:id='id6ec19be8-dd3b-4dcc-ba03-98aec13c3d6e'>
-        <position xmi:type='DI:Point' x='11.4080810546875' y='-19.67333984375'/>
+        <position xmi:type='DI:Point' x='11.4080810546875' y='-22.67333984375'/>
         <semanticModel xmi:type='DI:SimpleSemanticModelBridge' typeInfo='sourcename'/>
       </contained>
       <contained xmi:type='DI:GraphNode' xmi:id='iddf250146-05ce-480e-a6dc-717ab78c1b33'>

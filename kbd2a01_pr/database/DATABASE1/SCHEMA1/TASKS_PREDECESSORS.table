@@ -10,6 +10,10 @@
             <key>precision</key>
             <value class="java.lang.String">6</value>
           </entry>
+          <entry>
+            <key>scale</key>
+            <value class="java.lang.Integer">0</value>
+          </entry>
         </attributeValues>
         <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
           <typeName>NUMBER</typeName>
