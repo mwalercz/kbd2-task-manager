@@ -184,6 +184,28 @@
       </dataTypeUsage>
       <default class="java.lang.String">0</default>
       <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Percentage of completeness of this task.</value>
+        </entry>
+      </properties>
+    </column>
+    <column>
+      <name>CREATED_DATE</name>
+      <dataTypeUsage>
+        <dataTypeID class="oracle.javatools.db.datatypes.DataTypeID">
+          <typeName>DATE</typeName>
+        </dataTypeID>
+      </dataTypeUsage>
+      <default class="java.lang.String">SYSDATE</default>
+      <notNull>true</notNull>
+      <properties>
+        <entry>
+          <key>Comment</key>
+          <value class="java.lang.String">Date on which this task was created.</value>
+        </entry>
+      </properties>
     </column>
   </columns>
   <constraints>
