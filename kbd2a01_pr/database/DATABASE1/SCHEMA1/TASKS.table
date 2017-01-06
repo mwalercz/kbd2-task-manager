@@ -246,32 +246,6 @@
       </indexID>
     </constraint>
     <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASK_PROJ_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>PROJECT_ID</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>PROJ_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>PROJECTS</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
       <name>TASK_SIP_FK</name>
       <columnIDs>
         <columnID class="oracle.javatools.db.NameBasedID">
@@ -300,32 +274,6 @@
         <name>SIP_PK</name>
         <parent class="oracle.javatools.db.NameBasedID">
           <name>STATES_IN_PROJECTS</name>
-          <schemaName>SCHEMA1</schemaName>
-          <type>TABLE</type>
-        </parent>
-        <schemaName>SCHEMA1</schemaName>
-        <type>CONSTRAINT</type>
-      </referenceID>
-    </constraint>
-    <constraint class="oracle.javatools.db.FKConstraint">
-      <name>TASK_STATE_FK</name>
-      <columnIDs>
-        <columnID class="oracle.javatools.db.NameBasedID">
-          <name>STATE_CODE</name>
-          <parent class="oracle.javatools.db.NameBasedID">
-            <name>TASKS</name>
-            <schemaName>SCHEMA1</schemaName>
-            <type>TABLE</type>
-          </parent>
-          <schemaName>SCHEMA1</schemaName>
-          <type>COLUMN</type>
-        </columnID>
-      </columnIDs>
-      <enabled>true</enabled>
-      <referenceID class="oracle.javatools.db.NameBasedID">
-        <name>STATE_PK</name>
-        <parent class="oracle.javatools.db.NameBasedID">
-          <name>STATES</name>
           <schemaName>SCHEMA1</schemaName>
           <type>TABLE</type>
         </parent>
