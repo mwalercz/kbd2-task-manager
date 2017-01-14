@@ -1,7 +1,8 @@
 CREATE TABLE PROJECTS 
 (
   PROJECT_ID NUMBER(6, 0) NOT NULL, 
-  NAME VARCHAR2(64) NOT NULL
+  NAME VARCHAR2(64) NOT NULL,
+  LAST_TASK_NO NUMBER(5, 0) DEFAULT 0
 );
 
 CREATE TABLE STATES 
@@ -103,13 +104,26 @@ END;
 
 CREATE OR REPLACE TRIGGER TASKS_BIR_TRG BEFORE INSERT ON TASKS FOR EACH ROW WHEN (NEW.TASK_NO IS NULL)
 /* Trigger that assigns TASK_NO to newly inserted TASK. TASK_NO is unique in scope of PROJECT that TASK is assigned to. */
+DECLARE
+   CURSOR c1 IS
+   SELECT LAST_TASK_NO
+     FROM PROJECTS              
+   WHERE PROJECT_ID = :NEW.PROJECT_ID
+   FOR UPDATE OF LAST_TASK_NO;
+
+   temp_last_task_no number(5,0);
 BEGIN
-  SELECT MAX(TASK_NO) + 1 INTO :NEW.TASK_NO FROM TASKS WHERE PROJECT_ID = :NEW.PROJECT_ID;
-  IF :NEW.TASK_NO IS NULL THEN
-      SELECT 1 INTO :NEW.TASK_NO FROM DUAL;
-  END IF;
+   OPEN c1;
+   FETCH c1 INTO temp_last_task_no;
+   temp_last_task_no := temp_last_task_no + 1;
+   :NEW.TASK_NO := temp_last_task_no;
+   UPDATE PROJECTS
+      SET LAST_TASK_NO = temp_last_task_no
+      WHERE CURRENT OF c1;
+   CLOSE c1;
 END;
 /
+
 
 CREATE OR REPLACE TRIGGER TASKS_BUR_TRG BEFORE UPDATE ON TASKS FOR EACH ROW WHEN (NEW.CREATED_DATE <> OLD.CREATED_DATE)
 /* Trigger that forbids changing CREATED_DATE on TASK and raises application error if it occurs. */
