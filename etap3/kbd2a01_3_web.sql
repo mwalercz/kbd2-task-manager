@@ -1,26 +1,28 @@
 CREATE OR REPLACE PACKAGE tasks_rpt AS
   PROCEDURE html;
-  PROCEDURE rpt (proj_id NUMBER);
+  PROCEDURE rpt (proj_id NUMBER DEFAULT 1);
 END tasks_rpt;
 
 CREATE OR REPLACE PACKAGE BODY tasks_rpt AS
+
+  PROCEDURE close_div IS
+    /* There is no htp/htf procedure to close div */
+    BEGIN
+      htp.prn('</div>');
+    END;
+
   PROCEDURE print_data (value VARCHAR2) IS
     BEGIN
-      htp.p('<div>');
-      htp.p(value);
-      htp.p('</div>');
+      htp.div;
+      htp.prn(value);
+      close_div();
     END print_data;
 
   PROCEDURE print_new_header(header VARCHAR2) IS
     BEGIN
-      htp.p('<div style="float:left;margin-left:40px;">');
+      htp.div(NULL, 'style="float:left;margin-left:40px;"');
       htp.header(4, header);
     END print_new_header;
-
-  PROCEDURE close_header IS
-    BEGIN
-      htp.p('</div>');
-    END;
 
   PROCEDURE show_projects IS
     CURSOR cur IS
@@ -37,9 +39,9 @@ CREATE OR REPLACE PACKAGE BODY tasks_rpt AS
 
   PROCEDURE html IS
     BEGIN
-      htp.p('Projects');
+      htp.header(2, 'Projects');
       htp.formOpen('tasks_rpt.rpt', 'POST');
-      htp.p('Project id');
+      htp.prn('Project id');
       htp.formText('proj_id', 6, 6);
       htp.formSubmit;
       htp.formClose;
@@ -70,7 +72,7 @@ CREATE OR REPLACE PACKAGE BODY tasks_rpt AS
           temp_state_code := v_task.STATE_CODE;
           print_new_header(v_task.STATE_NAME);
         ELSIF temp_state_code <> v_task.STATE_CODE THEN
-          close_header();
+          close_div();
           temp_state_code := v_task.STATE_CODE;
           print_new_header(v_task.STATE_NAME);
         END IF;
