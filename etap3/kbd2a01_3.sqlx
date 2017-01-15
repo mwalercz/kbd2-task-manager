@@ -1,0 +1,40 @@
+-- Zapytanie SQLX z parametrami ‘STATE_CODE’ i ‘PROJECT_ID’ zwracające zadania w danym projekcie, w danym stanie.
+
+SELECT XMLElement("project",
+                  XMLATTRIBUTES (PROJECTS.NAME AS "name", PROJECTS.PROJECT_ID AS "id"),
+                  XMLElement("tasks",
+                             (
+                               SELECT XMLAgg(
+                                   XMLElement("task",
+                                              XMLATTRIBUTES (TASKS.TASK_NO AS "number", TASKS.STATE_CODE AS "state-code"),
+                                              TASKS.NAME
+                                   )
+                               )
+                               FROM TASKS
+                               WHERE TASKS.PROJECT_ID = 1 AND TASKS.STATE_CODE = 'TST'
+                             )
+                  )
+).getClobVal()
+FROM PROJECTS
+WHERE PROJECTS.PROJECT_ID = 1;
+
+-- Zapytanie SQLX z parametrem ‘PROJECT_ID’ zwracające nazwy oraz kody wszystkich możliwych stanów w danym projekcie.
+
+SELECT XMLElement("project",
+                  XMLATTRIBUTES (PROJECTS.NAME AS "name", PROJECTS.PROJECT_ID AS "id"),
+                  XMLElement("available-states",
+                             (
+                               SELECT XMLAgg(
+                                   XMLElement("state",
+                                              XMLATTRIBUTES (STATES.STATE_CODE AS "state-code"),
+                                              STATES.NAME
+                                   )
+                               )
+                               FROM STATES_IN_PROJECTS
+                                 JOIN STATES ON STATES_IN_PROJECTS.STATE_CODE = STATES.STATE_CODE
+                               WHERE STATES_IN_PROJECTS.PROJECT_ID = 2
+                             )
+                  )
+).getClobVal()
+FROM PROJECTS
+WHERE PROJECTS.PROJECT_ID = 2;
