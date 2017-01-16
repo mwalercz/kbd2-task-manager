@@ -1,13 +1,21 @@
--- Zapytanie SQLX z parametrami ‘STATE_CODE’ i ‘PROJECT_ID’ zwracające zadania w danym projekcie, w danym stanie.
+-- Zapytanie SQLX z parametrami ‘STATE_CODE’ i ‘PROJECT_ID’ zwracające zadania w danym
+-- projekcie, w danym stanie.
+-- Przykładowe parametry:
+-- 1. STATE_CODE = 'TST' PROJECT_ID = 1
+-- 2. STATE_CODE = 'PRG' PROJECT_ID = 1
 
-SELECT XMLElement("project",
+SELECT XMLELEMENT("project",
                   XMLATTRIBUTES (PROJECTS.NAME AS "name", PROJECTS.PROJECT_ID AS "id"),
-                  XMLElement("tasks",
+                  XMLELEMENT("tasks",
                              (
                                SELECT XMLAgg(
-                                   XMLElement("task",
-                                              XMLATTRIBUTES (TASKS.TASK_NO AS "number", TASKS.STATE_CODE AS "state-code"),
-                                              TASKS.NAME
+                                   XMLELEMENT("task",
+                                              XMLFOREST(
+                                                  TASKS.TASK_NO AS "number",
+                                                  TASKS.NAME AS "name",
+                                                  TASKS.STATE_CODE AS "state-code",
+                                                  TASKS.DESCRIPTION AS "description"
+                                              )
                                    )
                                )
                                FROM TASKS
@@ -18,16 +26,22 @@ SELECT XMLElement("project",
 FROM PROJECTS
 WHERE PROJECTS.PROJECT_ID = 1;
 
--- Zapytanie SQLX z parametrem ‘PROJECT_ID’ zwracające nazwy oraz kody wszystkich możliwych stanów w danym projekcie.
+-- Zapytanie SQLX z parametrem ‘PROJECT_ID’ zwracające nazwy oraz kody wszystkich
+-- możliwych stanów w danym projekcie.
+-- Przykładowe parametry (należy zmienić w dwóch miejscach):
+-- 1. PROJECT_ID = 1
+-- 2. PROJECT_ID = 2
 
-SELECT XMLElement("project",
+SELECT XMLELEMENT("project",
                   XMLATTRIBUTES (PROJECTS.NAME AS "name", PROJECTS.PROJECT_ID AS "id"),
-                  XMLElement("available-states",
+                  XMLELEMENT("available-states",
                              (
-                               SELECT XMLAgg(
-                                   XMLElement("state",
-                                              XMLATTRIBUTES (STATES.STATE_CODE AS "state-code"),
-                                              STATES.NAME
+                               SELECT XMLAGG(
+                                   XMLELEMENT("state",
+                                              XMLFOREST(
+                                                  STATES.STATE_CODE AS "code",
+                                                  STATES.NAME AS "name"
+                                              )
                                    )
                                )
                                FROM STATES_IN_PROJECTS
