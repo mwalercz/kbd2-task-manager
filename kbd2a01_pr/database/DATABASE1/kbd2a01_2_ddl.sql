@@ -103,24 +103,23 @@ END;
 /
 
 CREATE OR REPLACE TRIGGER TASKS_BIR_TRG BEFORE INSERT ON TASKS FOR EACH ROW WHEN (NEW.TASK_NO IS NULL)
-/* Trigger that assigns TASK_NO to newly inserted TASK. TASK_NO is unique in scope of PROJECT that TASK is assigned to. */
-DECLARE
-   CURSOR c1 IS
-   SELECT LAST_TASK_NO
-     FROM PROJECTS              
-   WHERE PROJECT_ID = :NEW.PROJECT_ID
-   FOR UPDATE OF LAST_TASK_NO;
+  /* Trigger that assigns TASK_NO to newly inserted TASK. TASK_NO is unique in scope of PROJECT that TASK is assigned to. */
+  BEGIN
+    :NEW.TASK_NO := next_task_no(:NEW.PROJECT_ID);
+  END;
+/
 
-   temp_last_task_no number(5,0);
-BEGIN
-   OPEN c1;
-   FETCH c1 INTO temp_last_task_no;
-   temp_last_task_no := temp_last_task_no + 1;
-   :NEW.TASK_NO := temp_last_task_no;
-   UPDATE PROJECTS
-      SET LAST_TASK_NO = temp_last_task_no
-      WHERE CURRENT OF c1;
-   CLOSE c1;
+CREATE OR REPLACE FUNCTION NEXT_TASK_NO(proj_id NUMBER) RETURN NUMBER IS
+  /* Function that takes project_id, increments last_task_no in that project by 1, and returns incremented last_task_no */
+  no  PROJECTS.LAST_TASK_NO%TYPE;
+  inc CONSTANT NUMBER(1) := 1;
+  BEGIN
+    SELECT LAST_TASK_NO + inc INTO no
+    FROM PROJECTS
+    WHERE PROJECT_ID = proj_id
+    FOR UPDATE;
+    UPDATE PROJECTS SET LAST_TASK_NO = no WHERE PROJECT_ID=proj_id;
+    RETURN no;
 END;
 /
 
